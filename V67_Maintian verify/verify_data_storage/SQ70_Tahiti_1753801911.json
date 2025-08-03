@@ -1,0 +1,18 @@
+{
+    "id": "verify_1753801911_6888e4b738fcc",
+    "part6": "SQ70",
+    "device_name": "Tahiti",
+    "pcr_owner": "",
+    "otc_owner": "",
+    "rd_owner": "",
+    "corr_wafer": "",
+    "clean_pad_type": "",
+    "verify_sort": "",
+    "verify_method": "",
+    "rule_verify_pass": "",
+    "rule_contact_window": "",
+    "rule_dib_check": "",
+    "general_remark": "",
+    "verify_data": [],
+    "last_updated": "2025-07-29 17:11:51"
+}

@@ -1,0 +1,71 @@
+/* Modal Banner 樣式調整 */
+.modal-banner {
+    background: #37474F; /* 改為純色背景 (使用表格標題的深灰色) */
+    color: white;
+    border-bottom: 1px solid white; /* 分隔線顏色調淡 */
+    padding: 30px 25px; /* 調整 Padding */
+    font-size: 1.1rem; /* 調整字體大小 */
+    font-weight: 500; /* 調整字重 */
+    border-radius: 6px; /* 只保留上方圓角 */
+    text-align: center;
+    margin: -20px -30px 25px -30px; /* 調整 margin 使其貼合頂部和左右 */
+    /* 移除 white-space: nowrap; */
+}
+
+/* Modal 內部標題 h2 */
+.modal-content h2 {
+    text-align: center;
+    border-bottom: 1px solid #eee; /* 分隔線顏色調淡 */
+    padding-bottom: 15px; /* 增加底部 padding */
+    margin-bottom: 25px; /* 增加底部 margin */
+    color: #333; /* 設定標題顏色 */
+    font-size: 1.4rem; /* 調整字體大小 */
+    font-weight: 500;
+}
+
+/* 表單群組與標籤 */
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; /* 增加群組間距 */
+}
+
+.form-group label {
+    width: 120px; /* 稍微加寬標籤寬度 */
+    font-weight: 500; /* 稍微降低字重 */
+    text-align: right;
+    margin-right: 10px; /* 增加右邊距 */
+    font-size: 14px; /* 調整字體大小 */
+    color: #555; /* 調整標籤顏色 */
+}
+/* 必填星號樣式 */
+.form-group label span {
+    color: #e53935; /* 調整紅色星號顏色 */
+    margin-right: 3px;
+}
+
+.form-group input,
+.form-group select {
+    flex-grow: 1;
+    padding: 10px 12px; /* 增加輸入框內邊距 */
+    border: 1px solid #ccc; /* 調整邊框顏色 */
+    border-radius: 4px; /* 調整圓角 */
+    width: 100%;
+    font-size: 14px; /* 調整字體大小 */
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s; /* 添加過渡效果 */
+}
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #546E7A; /* Focus 時的邊框顏色 */
+    box-shadow: 0 0 0 2px rgba(55, 71, 79, 0.2); /* Focus 時的陰影 */
+    outline: none;
+}
+
+.form-group input[readonly] {
+    border: none;
+    background: #eee; /* 給唯讀欄位一個淺灰色背景 */
+    color: #777; /* 調整唯讀文字顏色 */
+    font-weight: normal; /* 取消加粗 */
+    cursor: not-allowed; /* 更改滑鼠指標 */
+}

@@ -1,0 +1,18 @@
+{
+    "id": "verify_1753801776_6888e4307a5c9",
+    "part6": "213",
+    "device_name": "213",
+    "pcr_owner": "",
+    "otc_owner": "",
+    "rd_owner": "",
+    "corr_wafer": "",
+    "clean_pad_type": "",
+    "verify_sort": "",
+    "verify_method": "",
+    "rule_verify_pass": "",
+    "rule_contact_window": "",
+    "rule_dib_check": "",
+    "general_remark": "",
+    "verify_data": [],
+    "last_updated": "2025-07-29 17:09:36"
+}

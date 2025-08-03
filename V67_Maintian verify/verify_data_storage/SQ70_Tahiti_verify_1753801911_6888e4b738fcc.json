@@ -1,0 +1,40 @@
+{
+    "id": "verify_1753801911_6888e4b738fcc",
+    "part6": "SQ70",
+    "device_name": "Tahiti",
+    "pcr_owner": "",
+    "otc_owner": "",
+    "rd_owner": "",
+    "corr_wafer": "",
+    "clean_pad_type": "",
+    "verify_sort": "",
+    "verify_method": "",
+    "rule_verify_pass": "",
+    "rule_contact_window": "",
+    "rule_dib_check": "",
+    "general_remark": "",
+    "verify_data": [
+        {
+            "type_name": "S1",
+            "test_program": "EWQKDOQWDKQW",
+            "test_od": "120",
+            "prober_file": "EWQKDOQWDKQW",
+            "clean_od": "120"
+        },
+        {
+            "type_name": "S2",
+            "test_program": "EWQKDOQWDKQW",
+            "test_od": "110 um",
+            "prober_file": "EWQKDOQWDKQW",
+            "clean_od": "110 um"
+        },
+        {
+            "type_name": "RTM",
+            "test_program": "EWQKDOQWDKQW",
+            "test_od": "110",
+            "prober_file": "EWQKDOQWDKQW",
+            "clean_od": "110"
+        }
+    ],
+    "last_updated": "2025-08-03 15:42:23"
+}

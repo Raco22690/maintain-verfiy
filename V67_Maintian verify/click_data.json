@@ -1,0 +1,72 @@
+{
+    "4": {
+        "count": 17,
+        "ip_address": "::1",
+        "last_click": "2025-06-11 00:49:20"
+    },
+    "15": {
+        "count": 5,
+        "ip_address": "::1",
+        "last_click": "2025-06-11 00:49:46"
+    },
+    "18": {
+        "count": 5,
+        "ip_address": "::1",
+        "last_click": "2025-06-10 23:45:34"
+    },
+    "16": {
+        "count": 4,
+        "ip_address": "::1",
+        "last_click": "2025-06-10 23:46:49"
+    },
+    "11": {
+        "count": 4,
+        "ip_address": "::1",
+        "last_click": "2025-06-11 00:52:29"
+    },
+    "17": {
+        "count": 4,
+        "ip_address": "::1",
+        "last_click": "2025-06-11 00:50:40"
+    },
+    "2": {
+        "count": 3,
+        "ip_address": "::1",
+        "last_click": "2025-06-11 00:52:31"
+    },
+    "6": {
+        "count": 2,
+        "ip_address": "::1",
+        "last_click": "2025-06-10 23:40:59"
+    },
+    "12": {
+        "count": 2,
+        "ip_address": "::1",
+        "last_click": "2025-06-10 01:31:47"
+    },
+    "5": {
+        "count": 2,
+        "ip_address": "::1",
+        "last_click": "2025-06-10 23:40:57"
+    },
+    "13": {
+        "count": 1,
+        "ip_address": "::1",
+        "last_click": "2025-06-09 23:48:03"
+    },
+    "3": {
+        "count": 1,
+        "ip_address": "::1",
+        "last_click": "2025-06-09 23:23:33"
+    },
+    "19": {
+        "count": 1,
+        "ip_address": "::1",
+        "last_click": "2025-06-11 00:52:20"
+    },
+    "1": {
+        "count": 1,
+        "ip_address": "::1",
+        "last_click": "2025-06-11 00:52:34"
+    }
+}

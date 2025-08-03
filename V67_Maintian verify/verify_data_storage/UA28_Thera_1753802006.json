@@ -1,0 +1,26 @@
+{
+    "id": "verify_1753802006_6888e51662cec",
+    "part6": "UA28",
+    "device_name": "Thera",
+    "pcr_owner": "",
+    "otc_owner": "",
+    "rd_owner": "",
+    "corr_wafer": "",
+    "clean_pad_type": "",
+    "verify_sort": "",
+    "verify_method": "",
+    "rule_verify_pass": "",
+    "rule_contact_window": "",
+    "rule_dib_check": "",
+    "general_remark": "",
+    "verify_data": [
+        {
+            "type_name": "Sort1",
+            "test_program": "23",
+            "test_od": "213",
+            "prober_file": "213",
+            "clean_od": "21312"
+        }
+    ],
+    "last_updated": "2025-07-29 17:13:26"
+}

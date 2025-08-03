@@ -1,0 +1,26 @@
+{
+    "id": "verify_1753801776_6888e4307a5c9",
+    "part6": "SJ93",
+    "device_name": "BRAVA",
+    "pcr_owner": "",
+    "otc_owner": "",
+    "rd_owner": "",
+    "corr_wafer": "",
+    "clean_pad_type": "",
+    "verify_sort": "",
+    "verify_method": "",
+    "rule_verify_pass": "",
+    "rule_contact_window": "",
+    "rule_dib_check": "",
+    "general_remark": "",
+    "verify_data": [
+        {
+            "type_name": "SORT2 \u9ede\u6e2c",
+            "test_program": "OSDASDSAQDASDAS",
+            "test_od": "120",
+            "prober_file": "OSDASDSAQDASDAS",
+            "clean_od": "120"
+        }
+    ],
+    "last_updated": "2025-07-29 17:44:35"
+}
