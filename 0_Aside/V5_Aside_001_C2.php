@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TPCD_entrance首頁 - Compact Redesign</title>
+  <link rel="icon" href="..\Icon file\logo1.svg" type="image/svg+xml">
+  <style>
+    /* ========================  基本字體  ======================== */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+    :root{
+      /* 控制整體垂直密度的主要變量 */
+      --group-title-pad-y: 14px;   /* 群組標題上下 padding */
+      --group-title-font: 10px;    /* 群組標題字級 */
+      --nav-padding-y: 9px;        /* 導覽列項目的上下 padding  */
+      --nav-padding-x: 22px;       /* 導覽列項目的左右 padding  */
+      --nav-margin-y : 2px;        /* 導覽列項目的垂直間距      */
+      --nav-font     : 14px;       /* 導覽列項目的字級            */
+    }
+
+    /* ========================  主體設定  ======================== */
+    body{
+      margin:0;
+      font-family:'Roboto','Noto Sans TC',Arial,sans-serif;
+      background:#f0f2f5;
+      color:#333;
+      margin-left:280px;
+      transition:margin-left .4s cubic-bezier(.25,.8,.25,1);
+      overflow-x:hidden;
+      position:relative;
+    }
+    body.collapsed-aside{margin-left:70px;}
+
+    /* 右下浮水印 */
+    body::before{
+      content:"TPCD Design";
+      position:fixed;bottom:20px;right:20px;
+      font:700 16px 'Georgia',serif;
+      color:rgba(0,0,0,.08);
+      transform:rotate(-15deg);
+      pointer-events:none;z-index:0;opacity:.7;
+    }
+
+    /* ========================  側邊欄  ======================== */
+    .tpcd-aside{
+      position:fixed;top:0;left:0;width:280px;height:100vh;
+      background:linear-gradient(to bottom,#000,#262626);
+      display:flex;flex-direction:column;
+      box-shadow:3px 0 15px rgba(0,0,0,.25);
+      transition:width .4s cubic-bezier(.25,.8,.25,1);
+      overflow-y:auto;overflow-x:hidden;z-index:1000;
+    }
+    .tpcd-aside.collapsed{width:70px;}
+
+    /* ===== aside scrollbar (維持) ===== */
+    .tpcd-aside::-webkit-scrollbar{width:6px;}
+    .tpcd-aside::-webkit-scrollbar-track{background:rgba(255,255,255,.08);}  
+    .tpcd-aside::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:3px;}
+    .tpcd-aside::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.3);}  
+
+    /* ===== Aside 頂部 ===== */
+    .tpcd-aside-header{
+      display:flex;flex-direction:column;align-items:center;text-align:center;
+      padding:20px 15px; /* 由 25px 調整為 20px，稍微壓縮 */
+      border-bottom:1px solid #444;transition:padding .4s ease,opacity .3s ease;
+    }
+    .tpcd-logo{width:48px;height:48px;margin-bottom:8px;border-radius:50%;transition:width .3s,height .3s;}
+    .tpcd-aside.collapsed .tpcd-logo{width:40px;height:40px;margin-bottom:0;padding:4px;}
+
+    #tpcd-title{
+      font:700 28px 'Georgia',serif; /* 字級由 30px→28px */
+      color:#fff;margin:0;text-decoration:none;letter-spacing:.5px;
+      transition:opacity .3s .1s,transform .3s .1s;
+    }
+    #tpcd-department{
+      font-size:10px;color:#ccc;font-style:italic;letter-spacing:1px;text-transform:uppercase;padding-top:2px;
+      transition:opacity .3s,transform .3s;
+    }
+    .tpcd-current-time{margin-top:10px;font-size:13px;color:#d4d4d8;font-weight:400;}
+
+    .tpcd-aside.collapsed .tpcd-aside-header>*:not(.tpcd-logo){opacity:0;height:0;margin:0!important;padding:0!important;overflow:hidden;}
+
+    /* ===== 金色漸層邊框 ===== */
+    .tpcd-aside::after{
+      content:'';position:absolute;top:0;right:0;width:4px;height:100%;
+      background:linear-gradient(180deg,#FFC107,#FF9800,#FFC107,#FF5722);
+      background-size:100% 300%;animation:gradientMove 6s ease-in-out infinite;
+    }
+    @keyframes gradientMove{0%{background-position:0 0;}50%{background-position:0 100%;}100%{background-position:0 0;}}
+
+    /* ========================  導覽列  ======================== */
+    .tpcd-nav{padding-top:8px;flex-grow:1;}
+
+    .tpcd-nav a{
+      display:flex;align-items:center;
+      color:#f0f0f0;text-decoration:none;
+      padding:var(--nav-padding-y) var(--nav-padding-x);
+      font-size:var(--nav-font);
+      border-radius:8px;
+      margin:var(--nav-margin-y) 8px;
+      transition:background-color .3s,color .3s,padding-left .3s;
+      white-space:nowrap;position:relative;overflow:hidden;
+    }
+    .tpcd-nav a:hover{background:rgba(255,255,255,.15);color:#fff;padding-left:calc(var(--nav-padding-x) + 4px);} /* 位移量由 8px → 4px */
+    .tpcd-nav a.active{background:rgba(255,193,7,.20);color:#FFC107;font-weight:500;}
+    .tpcd-nav a.active::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:70%;background:#FFC107;border-radius:0 2px 2px 0;}
+
+    .tpcd-nav-icon{width:19px;height:19px;margin-right:12px;filter:grayscale(30%) opacity(.9);transition:transform .3s,filter .3s;}
+    .tpcd-nav a:hover .tpcd-nav-icon{transform:scale(1.1);filter:none;}
+
+    
+    /* ===== Collapse 時的導覽 ===== */
+    .tpcd-aside.collapsed .tpcd-nav a{padding:var(--nav-padding-y) 20px;justify-content:center;}
+    .tpcd-aside.collapsed .tpcd-nav a .nav-text{opacity:0;transform:translateX(-18px);width:0;pointer-events:none;display:inline-block;}
+    .tpcd-aside.collapsed .tpcd-nav-icon{margin-right:0;}
+
+    /* ========================  Dropdown  ======================== */
+    .tpcd-dropdown{position:relative;}
+    .tpcd-dropdown>.tpcd-dropdown-toggle::after{
+      content:'›';position:absolute;right:14px;top:50%;transform:translateY(-50%) rotate(0);
+      font-size:18px;color:#bbb;transition:transform .3s;
+    }
+    .tpcd-dropdown.expanded>.tpcd-dropdown-toggle::after{transform:translateY(-50%) rotate(90deg);} 
+    .tpcd-aside.collapsed .tpcd-dropdown>.tpcd-dropdown-toggle::after{display:none;}
+
+    .tpcd-dropdown-content{
+      display:none;background:#323232;border-radius:4px;margin:4px 8px 4px 34px;
+      overflow:hidden;max-height:0;opacity:0;transition:max-height .4s ease-out,padding .4s ease-out,opacity .3s ease-out;
+    }
+    .tpcd-dropdown.expanded .tpcd-dropdown-content{display:block;max-height:480px;opacity:1;padding:4px 0;}
+    .tpcd-dropdown-content a{padding:6px 18px;font-size:13px;color:#e0e0e0;display:block;margin:2px 0;}
+    .tpcd-dropdown-content a:hover{background:rgba(255,255,255,.2);color:#fff;}
+    .tpcd-aside.collapsed .tpcd-dropdown-content{display:none!important;max-height:0;opacity:0;}
+
+    /* ========================  群組標題  ======================== */
+    .tpcd-group-title{
+      font-size:var(--group-title-font);
+      color:#999;text-transform:uppercase;
+      letter-spacing:1.2px;font-weight:500;
+      padding:var(--group-title-pad-y) var(--nav-padding-x) 4px;
+      margin:6px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      border-bottom:1px solid rgba(255,255,255,.06); /* 細分隔線更清晰層次 */
+    }
+    .tpcd-aside.collapsed .tpcd-group-title{font-size:0;opacity:0;padding:0;height:0;margin:0;border:none;}
+
+    /* ========================  pin & toggle  ======================== */
+    #pin-toggle-container{padding:12px 0;margin-top:auto;border-top:1px solid #444;display:flex;justify-content:center;}
+    #pin-toggle{border:none;background:none;cursor:pointer;padding:4px;}
+    #pin-toggle img{width:20px;height:20px;filter:grayscale(20%) opacity(.8);transition:transform .3s,filter .3s;}
+    #pin-toggle:hover img{transform:scale(1.15);filter:none;}
+
+    #aside-toggle{
+      position:fixed;top:14px;left:280px;padding:5px 7px;margin-left:6px;border:none;cursor:pointer;z-index:1050;
+      background:#9E9E9E;color:#f0f0f0;border-radius:0 8px 8px 0;box-shadow:2px 0 8px rgba(0,0,0,.2);
+      font-size:18px;line-height:1;transition:left .4s cubic-bezier(.25,.8,.25,1),background .3s,transform .3s;
+    }
+    #aside-toggle:hover{background:#333;transform:translateX(2px);}  
+    body.collapsed-aside #aside-toggle{left:70px;}
+    #aside-toggle::before{content:'‹';display:inline-block;transition:transform .3s;}
+    body.collapsed-aside #aside-toggle::before{content:'›';}
+  </style>
+</head>
+<body class="no-transition">
+  <!-- ===== Aside ===== -->
+  <aside class="tpcd-aside" id="sidebar">
+    <div class="tpcd-aside-header">
+      <img src="..\Icon file\logo1.svg" alt="TPCD Logo" class="tpcd-logo">
+      <a href="..\0_homepage\V1_M_Top_main.php" id="tpcd-title">TPCD</a>
+      <span id="tpcd-department">Test Probe Card Department</span>
+      <div class="tpcd-current-time" id="current-time"></div>
+    </div>
+
+    <!-- ===== Nav ===== -->
+    <nav class="tpcd-nav">
+      <div class="tpcd-group">
+        <div class="tpcd-group-title">SYSTEM</div>
+        <div class="tpcd-dropdown"><a href="..\V50_homepage\V50_homepage D.php"><img src="..\Icon file\Aside\Home.png" class="tpcd-nav-icon" alt="首頁"><span class="nav-text">首頁</span></a></div>
+        <div class="tpcd-dropdown"><a href="..\V51_deviceonwerlist\V5_M_deviceownerlist D.php"><img src="..\Icon file\Aside\owner.png" class="tpcd-nav-icon" alt="Device owner"><span class="nav-text">Device owner control table</span></a></div>
+      </div>
+
+      <div class="tpcd-group">
+        <div class="tpcd-group-title">DEVICE</div>
+        <div class="tpcd-dropdown"><a href="#"><img src="..\Icon file\Aside\tester.png" class="tpcd-nav-icon" alt="Validation"><span class="nav-text">Validation tool control table</span></a></div>
+        <div class="tpcd-dropdown"><a href="#"><img src="..\Icon file\Aside\ateam.png" class="tpcd-nav-icon" alt="A‑team"><span class="nav-text">PCR A-team booking</span></a></div>
+      </div>
+
+      <div class="tpcd-group">
+        <div class="tpcd-group-title">P/C Tool</div>
+        <div class="tpcd-dropdown"><a href="#"><img src="..\Icon file\Aside\machine.png" class="tpcd-nav-icon" alt="Dashboard"><span class="nav-text">P/C Tool status dashboard</span></a></div>
+        <div class="tpcd-dropdown"><a href="#"><img src="..\Icon file\Aside\machine.png" class="tpcd-nav-icon" alt="Feedback"><span class="nav-text">PCR Feedback system</span></a></div>
+      </div>
+
+      <div class="tpcd-group">
+        <div class="tpcd-group-title">Other</div>
+        <div class="tpcd-dropdown"><a href="#"><img src="..\Icon file\Aside\tester.png" class="tpcd-nav-icon" alt="Duty"><span class="nav-text">值班名單&值班交換系統</span></a></div>
+      </div>
+
+      <div class="tpcd-group">
+        <div class="tpcd-group-title">UNDER DEVELOPMENT</div>
+        <div class="tpcd-dropdown" id="development-dropdown">
+          <a href="#" class="tpcd-dropdown-toggle"><img src="..\Icon file\Aside\development.png" class="tpcd-nav-icon" alt="Dev"><span class="nav-text">Development progress</span></a>
+          <div class="tpcd-dropdown-content"><a href="#">進度總覽</a><a href="#">Bug 修復</a><a href="#">功能開發</a></div>
+        </div>
+      </div>
+    </nav>
+
+    <div id="pin-toggle-container"><button id="pin-toggle" aria-label="Toggle Auto Collapse"><img id="pin-toggle-img" src="../icons/pin1.png" alt="Auto Collapse Toggle"></button></div>
+  </aside>
+
+  <button id="aside-toggle" aria-label="Toggle sidebar"></button>
+
+  <!-- ========================  Script  ======================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+      const sidebar=document.getElementById('sidebar');
+      const body=document.body;
+      const asideToggleBtn=document.getElementById('aside-toggle');
+      const pinToggleBtn=document.getElementById('pin-toggle');
+      const pinToggleImg=document.getElementById('pin-toggle-img');
+      let isCollapsed=localStorage.getItem('asideCollapsed')==='true';
+      if(isCollapsed){sidebar.classList.add('collapsed');body.classList.add('collapsed-aside');}
+      if(localStorage.getItem('autoCollapse')===null){localStorage.setItem('autoCollapse','true');}
+      setTimeout(()=>{body.classList.remove('no-transition');sidebar.classList.remove('no-transition');updatePinToggleImg();},50);
+
+      /* 時間顯示 */
+      const weekNum=d=>{d=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));d.setUTCDate(d.getUTCDate()-d.getUTCDay());const ys=new Date(Date.UTC(d.getUTCFullYear(),0,1));return Math.ceil(((d-ys)/864e5+1)/7);}  
+      const updateTime=()=>{
+        const now=new Date();const y=now.getFullYear();const wd=String(y).slice(-1)+String(weekNum(now)).padStart(2,'0');
+        const day=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][now.getDay()]+'.';
+        const str=`W${wd} ${day} ${y}/${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+        document.getElementById('current-time').textContent=str;
+      };
+      updateTime();setInterval(updateTime,6e4);
+
+      /* pin 圖示切換 */
+      function updatePinToggleImg(){const auto=localStorage.getItem('autoCollapse')==='true';pinToggleImg.src=auto?'../icons/pin1.png':'../icons/pin2.png';pinToggleImg.alt=auto?'Auto collapse enabled (Unpinned)':'Auto collapse disabled (Pinned)';}
+
+      /* toggle aside */
+      asideToggleBtn.addEventListener('click',()=>{isCollapsed=sidebar.classList.toggle('collapsed');body.classList.toggle('collapsed-aside');localStorage.setItem('asideCollapsed',isCollapsed);} );
+
+      /* pin 按鈕 */
+      pinToggleBtn.addEventListener('click',e=>{e.stopPropagation();const cur=localStorage.getItem('autoCollapse');localStorage.setItem('autoCollapse',cur==='true'?'false':'true');updatePinToggleImg();});
+
+      /* auto collapse on body click */
+      document.addEventListener('click',e=>{const auto=localStorage.getItem('autoCollapse')==='true';if(auto&&!isCollapsed&&!sidebar.contains(e.target)&&!asideToggleBtn.contains(e.target)){sidebar.classList.add('collapsed');body.classList.add('collapsed-aside');localStorage.setItem('asideCollapsed','true');isCollapsed=true;}});
+
+      /* dropdowns */
+      document.querySelectorAll('.tpcd-dropdown .tpcd-dropdown-toggle').forEach(t=>t.addEventListener('click',e=>{e.preventDefault();const parent=t.closest('.tpcd-dropdown');if(sidebar.classList.contains('collapsed')){sidebar.classList.remove('collapsed');body.classList.remove('collapsed-aside');localStorage.setItem('asideCollapsed','false');isCollapsed=false;setTimeout(()=>parent.classList.toggle('expanded'),100);}else parent.classList.toggle('expanded');}));
+
+      /* active link highlight */
+      document.querySelectorAll('.tpcd-nav a:not(.tpcd-dropdown-toggle)').forEach(l=>l.addEventListener('click',()=>{document.querySelectorAll('.tpcd-nav a.active').forEach(a=>a.classList.remove('active'));l.classList.add('active');}));
+      const currentPath=window.location.pathname.split('/').pop();
+      document.querySelectorAll('.tpcd-nav a').forEach(nav=>{const href=nav.getAttribute('href');if(href&&href.split('/').pop()===currentPath&&currentPath!==''){nav.classList.add('active');const dc=nav.closest('.tpcd-dropdown-content');if(dc)dc.closest('.tpcd-dropdown').classList.add('expanded');}});
+    });
+  </script>
+</body>
+</html>
